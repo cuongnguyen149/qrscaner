@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic', 'ngCordova'])
+var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,22 +23,28 @@ var app = angular.module('starter', ['ionic', 'ngCordova'])
   });
 });
 
-app.controller("mainCtr", function($scope, $cordovaBarcodeScanner) {
- 
+app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
     $scope.scanQR = function() {
+        // console.log('click');
         $cordovaBarcodeScanner.scan().then(function(result) {
            if(!result.cancelled)
             {
-              alert("Barcode type is: " + result.format);
-              alert("Decoded text is: " + result.text);
+              $rootScope.scanResult = result.text;
+              $state.go('workpass');
             }
-            else
-            {
-              alert("You have cancelled scan");
-            }
+            
         }, function(error) {
             console.log("An error happened -> " + error);
         });
     };
  
+});
+
+app.controller("workpassCtr", function($rootScope, $scope, $state, $ionicHistory, $ionicViewService) {
+ $scope.scanResult = $rootScope.scanResult;
+ // $scope.myGoBack = function() {
+ 
+ //    // $ionicHistory.goBack();
+ //    $state.go('app',{},{reload: true});
+ //  };
 });

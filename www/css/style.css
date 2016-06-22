@@ -1,7 +1,6 @@
 /* Empty. Add your own CSS if you like */
-.mybutton {
-	position: relative;
-    top: 50%;
-    left: 12.5%;
+.mbutton {
+	margin-top: 20%;
+	margin-left: 12.5%;
     width: 75%;
 }

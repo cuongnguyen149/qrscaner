@@ -46,7 +46,7 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
 app.controller("workpassCtr", function($rootScope, $scope) {
  var now       = Date.now();
  $scope.scanResult = $rootScope.scanResult;
- $scope.timeScan = (now - $rootScope.timeScan)/1000;
+ $scope.timeScan = ((now - $rootScope.timeScan)/1000).toFixed(3);
  // $scope.myGoBack = function() {
  
  //    // $ionicHistory.goBack();

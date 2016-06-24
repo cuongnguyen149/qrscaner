@@ -221,11 +221,14 @@
 //--------------------------------------------------------------------------
 - (void)returnSuccess:(NSString*)scannedText format:(NSString*)format cancelled:(BOOL)cancelled flipped:(BOOL)flipped callback:(NSString*)callback{
     NSNumber* cancelledNumber = [NSNumber numberWithInt:(cancelled?1:0)];
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    NSNumber *timeNumber = [NSNumber numberWithDouble: timeStamp];
 
     NSMutableDictionary* resultDict = [[NSMutableDictionary alloc] init];
-    [resultDict setObject:scannedText     forKey:@"text"];
-    [resultDict setObject:format          forKey:@"format"];
-    [resultDict setObject:cancelledNumber forKey:@"cancelled"];
+    [resultDict setObject:scannedText     forKey"text"];
+    [resultDict setObject:format          forKey"format"];
+    [resultDict setObject:cancelledNumber forKey"cancelled"];
+    [resultDict setObject:timeNumber      forKey"TIME"];
 
     CDVPluginResult* result = [CDVPluginResult
                                resultWithStatus: CDVCommandStatus_OK

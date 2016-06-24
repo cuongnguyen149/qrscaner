@@ -29,27 +29,24 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
         $cordovaBarcodeScanner.scan().then(function(result) {
            if(!result.cancelled)
             {
-              var now       = Date.now() / 1000 | 0;
+              
 
               $rootScope.scanResult = result.text;
-              $rootScope.timeScan   = now - result.TIME / 1000;
+              $rootScope.timeScan   = result.TIME;
               $state.go('workpass');
             }
             
         }, function(error) {
             console.log("An error happened -> " + error);
-        },{
-          RESULT_DISPLAY_DURATION_MS: 0,
-          SCAN_FORMATS: 'QR_CODE',
-          PROMPT_MESSAGE: 'Present QR Code'
         });
     };
  
 });
 
-app.controller("workpassCtr", function($rootScope, $scope, $state, $ionicHistory, $ionicViewService) {
+app.controller("workpassCtr", function($rootScope, $scope) {
+ var now       = Date.now();
  $scope.scanResult = $rootScope.scanResult;
- $scope.timeScan = $rootScope.timeScan;
+ $scope.timeScan = (now - $rootScope.timeScan)/1000;
  // $scope.myGoBack = function() {
  
  //    // $ionicHistory.goBack();

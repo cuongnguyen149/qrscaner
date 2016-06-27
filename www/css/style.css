@@ -3,8 +3,11 @@
 	margin-top: 5%;
 	margin-left: 12.5%;
     width: 75%;
+	background-color: #005787 !important;
 }
-
+.mbutton:active {
+	background-color: #00476e !important;
+}
 .csc_logo{
 	width: 40%;
 	display:block;
@@ -19,4 +22,17 @@ h4{
 }
 .content{
 	margin-top: 50px;
+}
+.border-paragraph{
+	border: 1px solid #005787;
+	width: 100%;
+	background: #e2f1fe;
+	padding: 5px;
+	color:  #005787;
+}	
+.workpass-content{
+	margin: 10px;
+}
+.bar.bar-positive{
+	background-color: #005787;
 }

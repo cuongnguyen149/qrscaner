@@ -29,13 +29,10 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
         $cordovaBarcodeScanner.scan().then(function(result) {
            if(!result.cancelled)
             {
-              
-
               $rootScope.scanResult = result.text;
               $rootScope.timeScan   = result.TIME;
               $state.go('workpass');
-            }
-            
+            }    
         }, function(error) {
             console.log("An error happened -> " + error);
         });
@@ -43,13 +40,28 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
  
 });
 
-app.controller("workpassCtr", function($rootScope, $scope) {
- var now       = Date.now();
- $scope.scanResult = $rootScope.scanResult;
- $scope.timeScan = ((now - $rootScope.timeScan)/1000).toFixed(3);
- // $scope.myGoBack = function() {
- 
- //    // $ionicHistory.goBack();
- //    $state.go('app',{},{reload: true});
- //  };
+app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
+  $scope.nextScan = function() {
+    // console.log('click');
+    $cordovaBarcodeScanner.scan().then(function(result) {
+       if(!result.cancelled)
+        {
+          $scope.scanResult       = result.text;
+          $scope.timeScanBefore   = result.TIME;
+          $state.go('workpass');
+        }  
+    }, function(error) {
+        console.log("An error happened -> " + error);
+    });
+  }; 
+  var now           = Date.now();
+  $scope.scanResult = $rootScope.scanResult;
+  if($scope.timeScanBefore ){
+    $scope.timeScan   = ((now - $scope.timeScanBefore)/1000).toFixed(3);
+  }else{
+    $scope.timeScan   = ((now - $rootScope.timeScan)/1000).toFixed(3);
+  }
+  $scope.exit       = function() {
+    navigator.app.exitApp();
+  };
 });

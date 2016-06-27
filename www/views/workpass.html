@@ -1,15 +1,15 @@
 <ion-view>
 	<ion-nav-bar class="bar-positive">
         <ion-nav-back-button class="button-clear">
-          <i class="ion-arrow-left-c"></i>
+          <i class="ion-arrow-left-c"> Back</i>
         </ion-nav-back-button>
     </ion-nav-bar>
-   <ion-content class="workpass-content">
+   <ion-content scroll="false" class="workpass-content">
 	   	<p><b>Result:</b></p>
-	   	<p class="border-paragraph">scanResult scanResult scanResult scanResult scanResult scanResult scanResult</p>
+	   	<p class="border-paragraph">{{scanResult}}</p>
 	   	<p><b>Time:</b>
-	   	<p class="border-paragraph" >timeScans</p>
-	   	<button class="mbutton button button-positive" > Next Scan </button>
-	   	<button class="mbutton button button-positive" > Exit </button>
+	   	<p class="border-paragraph" >{{timeScan}}s</p>
+	   	<button class="mbutton button button-positive" ng-click="nextScan()" > Next Scan </button>
+	   	<button class="mbutton button button-positive" ng-click="exit()"> Exit </button>
    </ion-content>
 </ion-view>

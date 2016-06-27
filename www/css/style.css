@@ -1,6 +1,22 @@
 /* Empty. Add your own CSS if you like */
 .mbutton {
-	margin-top: 20%;
+	margin-top: 5%;
 	margin-left: 12.5%;
     width: 75%;
+}
+
+.csc_logo{
+	width: 40%;
+	display:block;
+    margin:auto;
+}
+.mom_logo{
+	display:block;
+    margin:auto;
+}
+h4{
+	align:center;
+}
+.content{
+	margin-top: 50px;
 }

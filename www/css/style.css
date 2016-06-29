@@ -1,4 +1,7 @@
 /* Empty. Add your own CSS if you like */
+h3{
+	color: #ffffff;
+}
 .mbutton {
 	margin-top: 5%;
 	margin-left: 12.5%;
@@ -16,23 +19,41 @@
 .mom_logo{
 	display:block;
     margin:auto;
-}
-h4{
-	align:center;
-}
-.content{
+}.content{
 	margin-top: 50px;
 }
 .border-paragraph{
 	border: 1px solid #005787;
 	width: 100%;
-	background: #e2f1fe;
+	background: #35a4e2;
 	padding: 5px;
-	color:  #005787;
+	color:  #ffffff;
+    border-radius: 8px;
 }	
 .workpass-content{
-	margin: 10px;
+	background: #006eab;
+	padding: 10px;
 }
 .bar.bar-positive{
 	background-color: #005787;
+}
+.mbutton-outline  {
+	margin-top: 5%;
+	margin-left: 25%;
+    width: 50%;    
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    border-width: 3px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.button.button-positive.button-outline.activated {
+	background-color: #005787 !important;
+}
+.char{
+	height: 350px;
+	background: #ffffff	
+}
+.icon_result{
+	width: 100%;
 }

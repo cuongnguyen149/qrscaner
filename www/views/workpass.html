@@ -1,26 +1,21 @@
 <ion-view>
-	<ion-nav-bar class="bar-positive">
-        <ion-nav-back-button class="button-clear">
-          <i class="ion-arrow-left-c"> Back</i>
-        </ion-nav-back-button>
-    </ion-nav-bar>
    <ion-content scroll="false" class="workpass-content">
 	   	<h3 align="center">QR CODE DECRYPTION</h3>
       <div class="chart">
         <canvas class="chart-canvas" id="radar" >
+
         </canvas> 
       </div>
-      <div class="row">
+      <div class="row result-detail">
          <div class="col col-20">
           <img class="icon_result" src="img/unlock.png">
          </div>
         <div class="col col-40">
           <div class="row">
-            <h4>500ms</h4>
+            <span class="time-result">{{timeScan}}ms</span>
           </div>
           <div class="row">
-            Decryption
-
+            <h5>Response Time</h5>
           </div>
         </div>
         <div class="col col-20">
@@ -28,14 +23,14 @@
         </div>
         <div class="col col-40">
            <div class="row">
-            ms
+             <span class="time-result">500ms</span>
           </div>
           <div class="row">
-            Focus
+            <h5>Focus</h5>
           </div>
         </div>
       </div>
-	   	<p class="border-paragraph">scanResultscanResultscanResultscadnResultscanRe123sul1231232t1</p>
+	   	<p class="border-paragraph">{{scanResult}}</p>
 	   	<button class="mbutton-outline button  button-outline button-positive" ng-click="nextScan()" > Next Scan </button>
    </ion-content>
 </ion-view>

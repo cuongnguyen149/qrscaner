@@ -1,12 +1,14 @@
 /* Empty. Add your own CSS if you like */
-h3{
+h3, h5{
 	color: #ffffff;
 }
+
 .mbutton {
 	margin-top: 5%;
 	margin-left: 12.5%;
     width: 75%;
-	background-color: #005787 !important;
+	background-color: #006eab !important;
+	font-weight: bold;
 }
 .mbutton:active {
 	background-color: #00476e !important;
@@ -26,16 +28,14 @@ h3{
 	border: 1px solid #005787;
 	width: 100%;
 	background: #35a4e2;
-	padding: 5px;
+	padding: 5px;	
+    font-size: 1.25em;
 	color:  #ffffff;
     border-radius: 8px;
 }	
 .workpass-content{
 	background: #006eab;
 	padding: 10px;
-}
-.bar.bar-positive{
-	background-color: #005787;
 }
 .mbutton-outline  {
 	margin-top: 5%;
@@ -51,15 +51,26 @@ h3{
 	background-color: #005787 !important;
 }
 .chart{
-	height: 50%;
+	height: 47%;
 	background: transparent;	
 }
 
 canvas{
-    width: 100% !important;
-    max-width: 800px;
+	top:10%;
+	position: absolute;
+	left: -25%;
+    width: 150% !important;
     height: auto !important;
-    }
+}
 .icon_result{
 	width: 100%;
+}
+.time-result{
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #ffffff;
+}
+.result-detail{
+	margin-left: -20px
+
 }

@@ -25,20 +25,24 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
     $scope.scanQR = function() {
-      // $cordovaBarcodeScanner.scan().then(function(result) {
-      //    if(!result.cancelled)
-      //     {
-      //       $rootScope.scanResult = result.text;
-      //       $rootScope.timeScan   = result.TIME;
+      $cordovaBarcodeScanner.scan().then(function(result) {
+         if(!result.cancelled)
+          {
+            $rootScope.scanResult = result.text;
+            $rootScope.timeScan   = result.TIME;
             $state.go('workpass');
-      //     }    
-      // }, function(error) {
-      //     console.log("An error happened -> " + error);
-      // });
+          }    
+      }, function(error) {
+          console.log("An error happened -> " + error);
+      });
     };
 });
 
 app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
+  
+  var now           = Date.now();
+  $scope.scanResult = $rootScope.scanResult;
+  $scope.timeScan   = ((now - $rootScope.timeScan)/1000).toFixed(3);
   
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
@@ -55,49 +59,47 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
         var fontSize = (height / 114).toFixed(2);
         this.chart.ctx.font = fontSize + "em Verdana";
         this.chart.ctx.textBaseline = "middle";
+        this.chart.ctx.fillStyle = "#ffffff";
 
-        var text = "82%",
+        var text = "1250ms",
             textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
             textY = height / 2;
-
+        // var text1 = "1250",
+        //     textX1 = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
+        //     textY1 = height / 2.5;    
         this.chart.ctx.fillText(text, textX, textY);
+        // this.chart.ctx.fillText(text1, textX1, textY1);
     }
   });
 
   var data = [{
-      value: 30,
-      color: "#F7464A"
+      value: 500,
+      color: "#35a4e2"
   }, {
-      value: 50,
-      color: "#E2EAE9"
+      value: 750,
+      color: "#e77200"
   }];
 
   var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
-      responsive: true,
-
-    maintainAspectRatio: true 
+    responsive: true,
+    percentageInnerCutout : 70,
+    animationSteps: 20
+    
   });
   $scope.nextScan = function() {
     // console.log('click');
-    $cordovaBarcodeScanner.scan().then(function(result) {
-       if(!result.cancelled)
-        {
-          $scope.scanResult       = result.text;
-          $scope.timeScanBefore   = result.TIME;
-          $state.go('workpass');
-        }  
-    }, function(error) {
-        console.log("An error happened -> " + error);
-    });
+    // $cordovaBarcodeScanner.scan().then(function(result) {
+    //    if(!result.cancelled)
+    //     {
+    //       $scope.scanResult       = result.text;
+    //       $scope.timeScanBefore   = result.TIME;
+    //       $state.go('workpass');
+    //     }  
+    // }, function(error) {
+    //     console.log("An error happened -> " + error);
+    // });
   }; 
-  var now           = Date.now();
-  $scope.scanResult = $rootScope.scanResult;
-  if($scope.timeScanBefore ){
-    $scope.timeScan   = ((now - $scope.timeScanBefore)/1000).toFixed(3);
-  }else{
-    $scope.timeScan   = ((now - $rootScope.timeScan)/1000).toFixed(3);
-  }
-  $scope.exit       = function() {
-    navigator.app.exitApp();
-  };
+  // $scope.exit       = function() {
+  //   navigator.app.exitApp();
+  // };
 });

@@ -62,15 +62,22 @@ canvas{
     width: 150% !important;
     height: auto !important;
 }
-.icon_result{
-	width: 100%;
-}
+
 .time-result{
 	font-weight: bold;
-	font-size: 1.4em;
+	font-size: 1.3em;
 	color: #ffffff;
 }
 .result-detail{
-	margin-left: -20px
+	margin-left: -15px;
 
+}
+.ion-aperture{
+	color: #ffffff;
+	font-size: 4em;
+}
+.ion-ios-unlocked{
+	margin-left: 10px;
+	color: #ffffff;
+	font-size: 4em;
 }

@@ -25,22 +25,58 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
     $scope.scanQR = function() {
-        // console.log('click');
-        $cordovaBarcodeScanner.scan().then(function(result) {
-           if(!result.cancelled)
-            {
-              $rootScope.scanResult = result.text;
-              $rootScope.timeScan   = result.TIME;
-              $state.go('workpass');
-            }    
-        }, function(error) {
-            console.log("An error happened -> " + error);
-        });
+      // $cordovaBarcodeScanner.scan().then(function(result) {
+      //    if(!result.cancelled)
+      //     {
+      //       $rootScope.scanResult = result.text;
+      //       $rootScope.timeScan   = result.TIME;
+            $state.go('workpass');
+      //     }    
+      // }, function(error) {
+      //     console.log("An error happened -> " + error);
+      // });
     };
- 
 });
 
 app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
+  
+  Chart.types.Doughnut.extend({
+    name: "DoughnutTextInside",
+    // showTooltip: function() {
+    //     this.chart.ctx.save();
+    //     Chart.types.Doughnut.prototype.showTooltip.apply(this, arguments);
+    //     this.chart.ctx.restore();
+    // },
+    draw: function() {
+        Chart.types.Doughnut.prototype.draw.apply(this, arguments);
+        var width = this.chart.width,
+            height = this.chart.height;
+
+        var fontSize = (height / 114).toFixed(2);
+        this.chart.ctx.font = fontSize + "em Verdana";
+        this.chart.ctx.textBaseline = "middle";
+
+        var text = "82%",
+            textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
+            textY = height / 2;
+
+        this.chart.ctx.fillText(text, textX, textY);
+    }
+  });
+
+  var data = [{
+      value: 30,
+      color: "#F7464A"
+  }, {
+      value: 50,
+      color: "#E2EAE9"
+  }];
+
+  var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
+      responsive: true,
+
+    maintainAspectRatio: true 
+  });
   $scope.nextScan = function() {
     // console.log('click');
     $cordovaBarcodeScanner.scan().then(function(result) {

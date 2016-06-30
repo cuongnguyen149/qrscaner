@@ -50,10 +50,16 @@ h3{
 .button.button-positive.button-outline.activated {
 	background-color: #005787 !important;
 }
-.char{
-	height: 350px;
-	background: #ffffff	
+.chart{
+	height: 50%;
+	background: transparent;	
 }
+
+canvas{
+    width: 100% !important;
+    max-width: 800px;
+    height: auto !important;
+    }
 .icon_result{
 	width: 100%;
 }

@@ -51,15 +51,16 @@ h3, h5{
 	background-color: #005787 !important;
 }
 .chart{
-	height: 47%;
-	background: transparent;	
+	height: 45%;
+	background: transparent;
+	margin-bottom: 10px;	
 }
 
 canvas{
 	top:10%;
 	position: absolute;
-	left: -25%;
-    width: 150% !important;
+	left: -20%;
+    width: 140% !important;
     height: auto !important;
 }
 
@@ -68,16 +69,13 @@ canvas{
 	font-size: 1.3em;
 	color: #ffffff;
 }
-.result-detail{
-	margin-left: -15px;
 
-}
 .ion-aperture{
 	color: #ffffff;
 	font-size: 4em;
 }
-.ion-ios-unlocked{
-	margin-left: 10px;
+.ion-clock{
+	margin-left: 5px;
 	color: #ffffff;
 	font-size: 4em;
 }

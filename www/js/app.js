@@ -25,6 +25,7 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
     $scope.scanQR = function() {
+      $rootScope.startTime = Date.now();
       $cordovaBarcodeScanner.scan().then(function(result) {
          if(!result.cancelled)
           {
@@ -42,7 +43,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
   
   var now           = Date.now();
   $scope.scanResult = $rootScope.scanResult;
-  $scope.timeScan   = ((now - $rootScope.timeScan)/1000).toFixed(3);
+  $scope.timeScan   = now - $rootScope.timeScan;
   
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
@@ -79,13 +80,13 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
       value: 750,
       color: "#e77200"
   }];
-
-  var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
-    responsive: true,
-    percentageInnerCutout : 70,
-    animationSteps: 20
-    
-  });
+  setTimeout(function() {
+    var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
+      responsive: true,
+      percentageInnerCutout : 70,
+      animationSteps: 40  
+    });
+  }, 500);
   $scope.nextScan = function() {
     // console.log('click');
     // $cordovaBarcodeScanner.scan().then(function(result) {

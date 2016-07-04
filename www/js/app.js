@@ -44,7 +44,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
   var now           = Date.now();
   $scope.scanResult = $rootScope.scanResult;
   $scope.timeScan   = now - $rootScope.timeScan;
-  
+  $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
     // showTooltip: function() {
@@ -62,7 +62,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
         this.chart.ctx.textBaseline = "middle";
         this.chart.ctx.fillStyle = "#ffffff";
 
-        var text = "1250ms",
+        var text = $scope.timeScan + $scope.timeFocus + "ms",
             textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
             textY = height / 2;
         // var text1 = "1250",
@@ -74,10 +74,10 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
   });
 
   var data = [{
-      value: 500,
+      value: $scope.timeScan,
       color: "#35a4e2"
   }, {
-      value: 750,
+      value: $scope.timeFocus,
       color: "#e77200"
   }];
   setTimeout(function() {

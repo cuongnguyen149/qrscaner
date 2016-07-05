@@ -10,7 +10,7 @@ h3, h5{
 	background-color: #006eab !important;
 	font-weight: bold;
 }
-.mbutton:active {
+.mbutton.activated {
 	background-color: #00476e !important;
 }
 .csc_logo{

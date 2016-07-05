@@ -23,14 +23,14 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
   });
 });
 
-app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
+app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state, $window ) {
     $scope.scanQR = function() {
-      $rootScope.startTime = Date.now();
+      $window.localStorage.startTime = Date.now();
       $cordovaBarcodeScanner.scan().then(function(result) {
          if(!result.cancelled)
           {
-            $rootScope.scanResult = result.text;
-            $rootScope.timeScan   = result.TIME;
+            $window.localStorage.scanResult = result.text;
+            $window.localStorage.timeScan   = result.TIME;
             $state.go('workpass');
           }    
       }, function(error) {
@@ -39,12 +39,12 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
     };
 });
 
-app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state) {
+app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state, $window ) {
   
   var now           = Date.now();
-  $scope.scanResult = $rootScope.scanResult;
-  $scope.timeScan   = now - $rootScope.timeScan;
-  $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+  $scope.scanResult = $window.localStorage.scanResult;
+  $scope.timeScan   = now -  $window.localStorage.timeScan;
+  $scope.timeFocus  = $window.localStorage.timeScan - $window.localStorage.startTime;
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
     // showTooltip: function() {
@@ -88,17 +88,22 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
     });
   }, 500);
   $scope.nextScan = function() {
-    // console.log('click');
-    // $cordovaBarcodeScanner.scan().then(function(result) {
-    //    if(!result.cancelled)
-    //     {
-    //       $scope.scanResult       = result.text;
-    //       $scope.timeScanBefore   = result.TIME;
-    //       $state.go('workpass');
-    //     }  
-    // }, function(error) {
-    //     console.log("An error happened -> " + error);
-    // });
+    $window.localStorage.startTime = Date.now();
+    $cordovaBarcodeScanner.scan().then(function(result) {
+       if(!result.cancelled)
+        {
+          // $state.go('workpass');
+          // $state.reload();
+          // $route.reload();
+
+          $window.localStorage.scanResult = result.text;
+          $window.localStorage.timeScan   = result.TIME;
+          $window.close();
+          $window.location.reload();
+        }  
+    }, function(error) {
+        console.log("An error happened -> " + error);
+    });
   }; 
   // $scope.exit       = function() {
   //   navigator.app.exitApp();

@@ -25,14 +25,14 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state, $window ) {
     $scope.scanQR = function() {
-      $window.localStorage.startTime = Date.now();
+      $rootScope.startTime = Date.now();
       $cordovaBarcodeScanner.scan().then(function(result) {
          if(!result.cancelled)
           {
-            $window.localStorage.scanResult = result.text;
-            $window.localStorage.timeScan   = result.TIME;
+            $rootScope.scanResult = result.text;
+            $rootScope.timeScan   = result.TIME;
             $state.go('workpass');
-          }    
+          }
       }, function(error) {
           console.log("An error happened -> " + error);
       });
@@ -40,18 +40,26 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
 });
 
 app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state, $window ) {
-  
+  $rootScope.$watch('timeScan', function() {
+     console.log('hey, timeScan has changed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+     var now           = Date.now();
+     $scope.scanResult = $rootScope.scanResult;
+     $scope.timeScan   = now -  $rootScope.timeScan;
+     $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+     setTimeout(function() {
+       var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
+         responsive: true,
+         percentageInnerCutout : 70,
+         animationSteps: 40
+       });
+     }, 500);
+  });
   var now           = Date.now();
-  $scope.scanResult = $window.localStorage.scanResult;
-  $scope.timeScan   = now -  $window.localStorage.timeScan;
-  $scope.timeFocus  = $window.localStorage.timeScan - $window.localStorage.startTime;
+  $scope.scanResult = $rootScope.scanResult;
+  $scope.timeScan   = now -  $rootScope.timeScan;
+  $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
-    // showTooltip: function() {
-    //     this.chart.ctx.save();
-    //     Chart.types.Doughnut.prototype.showTooltip.apply(this, arguments);
-    //     this.chart.ctx.restore();
-    // },
     draw: function() {
         Chart.types.Doughnut.prototype.draw.apply(this, arguments);
         var width = this.chart.width,
@@ -65,11 +73,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
         var text = $scope.timeScan + $scope.timeFocus + "ms",
             textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
             textY = height / 2;
-        // var text1 = "1250",
-        //     textX1 = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
-        //     textY1 = height / 2.5;    
         this.chart.ctx.fillText(text, textX, textY);
-        // this.chart.ctx.fillText(text1, textX1, textY1);
     }
   });
 
@@ -84,27 +88,24 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
     var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
       responsive: true,
       percentageInnerCutout : 70,
-      animationSteps: 40  
+      animationSteps: 40
     });
   }, 500);
+
   $scope.nextScan = function() {
-    $window.localStorage.startTime = Date.now();
+//    $window.localStorage.startTime = Date.now();
+    $rootScope.startTime = Date.now();
     $cordovaBarcodeScanner.scan().then(function(result) {
        if(!result.cancelled)
         {
-          // $state.go('workpass');
-          // $state.reload();
-          // $route.reload();
-
-          $window.localStorage.scanResult = result.text;
-          $window.localStorage.timeScan   = result.TIME;
+          $rootScope.scanResult = result.text;
+          $rootScope.timeScan   = result.TIME;
           $window.close();
-          $window.location.reload();
-        }  
+        }
     }, function(error) {
         console.log("An error happened -> " + error);
     });
-  }; 
+  };
   // $scope.exit       = function() {
   //   navigator.app.exitApp();
   // };

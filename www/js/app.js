@@ -40,12 +40,19 @@ app.controller("mainCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $
 });
 
 app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanner, $state, $window ) {
-  $rootScope.$watch('timeScan', function() {
-     console.log('hey, timeScan has changed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-     var now           = Date.now();
-     $scope.scanResult = $rootScope.scanResult;
-     $scope.timeScan   = now -  $rootScope.timeScan;
-     $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+  $rootScope.$watch('[timeScan, timeFocus]', function() {
+    console.log('hey, timeScan has changed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    var now           = Date.now();
+    $scope.scanResult = $rootScope.scanResult;
+    $scope.timeScan   = now -  $rootScope.timeScan;
+    $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+    var data = [{
+      value: $scope.timeScan,
+      color: "#35a4e2"
+    }, {
+      value: $scope.timeFocus,
+      color: "#e77200"
+    }];
      setTimeout(function() {
        var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
          responsive: true,

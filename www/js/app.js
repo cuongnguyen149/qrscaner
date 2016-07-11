@@ -54,13 +54,11 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
       value: $scope.timeFocus,
       color: "#e77200"
     }];
-     setTimeout(function() {
-       var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
-         responsive: true,
-         percentageInnerCutout : 70,
-         animationSteps: 40
-       });
-     }, 500);
+    var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
+     responsive: true,
+     percentageInnerCutout : 70,
+     animationSteps: 0
+    });
   });
   var now           = Date.now();
   $scope.scanResult = $rootScope.scanResult;
@@ -93,13 +91,11 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
       value: $scope.timeFocus,
       color: "#e77200"
   }];
-  setTimeout(function() {
-    var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
-      responsive: true,
-      percentageInnerCutout : 70,
-      animationSteps: 40
-    });
-  }, 500);
+  var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
+    responsive: true,
+    percentageInnerCutout : 70,
+    animationSteps: 0
+  });
 
   $scope.nextScan = function() {
 //    $window.localStorage.startTime = Date.now();

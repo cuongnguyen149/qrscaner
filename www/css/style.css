@@ -13,16 +13,27 @@ h3, h5{
 .mbutton.activated {
 	background-color: #00476e !important;
 }
+.content{
+	margin-top: 40px;
+	height: 100%;
+	background: #006eab;
+}
 .csc_logo{
-	width: 40%;
+	width: 35%;
 	display:block;
     margin:auto;
+}
+.mon-logo-row{
+	background: #ffffff;
+	padding-bottom: 30px;
+}
+.row-blue{
+	padding-top: 20px;
 }
 .mom_logo{
 	display:block;
     margin:auto;
-}.content{
-	margin-top: 50px;
+    width: 35%;
 }
 .border-paragraph{
 	border: 1px solid #005787;
@@ -57,13 +68,16 @@ h3, h5{
 }
 
 canvas{
-	top:10%;
-	position: absolute;
-	left: -20%;
     width: 140% !important;
     height: auto !important;
+    margin-left: -20%;
 }
-
+.col-focus{
+	margin-left: -25px !important;
+}
+.col-total{
+	margin-left: -25px !important;
+}
 .time-result{
 	font-weight: bold;
 	font-size: 1.3em;
@@ -75,7 +89,38 @@ canvas{
 	font-size: 4em;
 }
 .ion-clock{
-	margin-left: 5px;
 	color: #ffffff;
 	font-size: 4em;
+}
+
+@media only screen and (min-width : 361px) {
+/* Styles */
+	.mom_logo{
+	    width: 20%;
+	}
+	.csc_logo{
+		width: 20%;
+	}
+	.col {
+		margin-bottom: 0px !important;
+		padding: 0px;
+	}
+	.content{
+		margin-top: 10px;
+	}
+	.mon-logo-row{
+		padding-bottom: 15px;
+	}
+	canvas{
+	    width: 160% !important;
+	    height: auto !important;
+	    margin-left: -40%;
+	}
+	.col-focus{
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+	}
+	.col-total{
+		margin-left: 0px !important;
+	}	
 }

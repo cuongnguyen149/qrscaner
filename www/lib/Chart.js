@@ -37,7 +37,7 @@
 	Chart.defaults = {
 		global: {
 			// Boolean - Whether to animate the chart
-			animation: true,
+			animation: false,
 
 			// Number - Number of animation steps
 			animationSteps: 60,
@@ -2355,14 +2355,13 @@
 
 			//Declare segments as a static property to prevent inheriting across the Chart type prototype
 			this.segments = [];
-			this.outerRadius = (helpers.min([this.chart.width,this.chart.height]) -	this.options.segmentStrokeWidth/2)/2 - 3;
+			this.outerRadius = (helpers.min([this.chart.width,this.chart.height]) -	this.options.segmentStrokeWidth/2)/2;
 
 			this.SegmentArc = Chart.Arc.extend({
 				ctx : this.chart.ctx,
 				x : this.chart.width/2,
 				y : this.chart.height/2
 			});
-			console.log(this.chart.ctx);
 			//Set up tooltip events on the chart
 			if (this.options.showTooltips){
 				helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
@@ -2459,12 +2458,13 @@
 			}, this);
 		},
 		draw : function(easeDecimal){
+
 			var animDecimal = (easeDecimal) ? easeDecimal : 1;
 			this.clear();
 			helpers.each(this.segments,function(segment,index){
 				segment.transition({
 					circumference : this.calculateCircumference(segment.value),
-					outerRadius : this.outerRadius,
+					outerRadius : this.outerRadius - 2,
 					innerRadius : (this.outerRadius/100) * this.options.percentageInnerCutout
 				},animDecimal);
 

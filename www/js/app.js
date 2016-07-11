@@ -46,6 +46,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
     $scope.scanResult = $rootScope.scanResult;
     $scope.timeScan   = now -  $rootScope.timeScan;
     $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+    $scope.totalTime  = $scope.timeScan + $scope.timeFocus;
     var data = [{
       value: $scope.timeScan,
       color: "#35a4e2"
@@ -65,6 +66,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
   $scope.scanResult = $rootScope.scanResult;
   $scope.timeScan   = now -  $rootScope.timeScan;
   $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+  $scope.totalTime  = $scope.timeScan + $scope.timeFocus;
   Chart.types.Doughnut.extend({
     name: "DoughnutTextInside",
     draw: function() {
@@ -77,7 +79,7 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
         this.chart.ctx.textBaseline = "middle";
         this.chart.ctx.fillStyle = "#ffffff";
 
-        var text = $scope.timeScan + $scope.timeFocus + "ms",
+        var text = $scope.timeScan + "ms",
             textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
             textY = height / 2;
         this.chart.ctx.fillText(text, textX, textY);

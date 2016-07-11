@@ -1,38 +1,42 @@
 <ion-view>
    <ion-content scroll="false" class="workpass-content">
 	   	<h3 align="center">QR CODE DECRYPTION</h3>
-      <div class="chart">
-        <canvas class="chart-canvas" id="radar" >
-
-        </canvas> 
+      <div class="row responsive-sm">
+        <div class="col">
+          <div class="chart">
+            <canvas class="chart-canvas" id="radar" ></canvas> 
+          </div>
+        </div>
+        <div class="col col-result">
+          <div class="row result-detail">
+            <div class="col col-20">
+               <!-- <img class="icon_result" src="img/focus.png"> -->
+               <i class="icon ion-aperture"></i>
+            </div>
+            <div class="col col-40 col-focus">
+               <div class="row">
+                 <span class="time-result">{{timeFocus}}ms</span>
+              </div>
+              <div class="row">
+               <ion-icon name="add"></ion-icon>
+                <h5>Focus</h5>
+              </div>
+            </div>
+             <div class="col col-20">
+              <i class="icon ion-clock"></i>
+             </div>
+            <div class="col col-40 col-total">
+              <div class="row">
+                <span class="time-result">{{totalTime}}ms</span>
+              </div>
+              <div class="row">
+                <h5>Total</h5>
+              </div>
+            </div>
+          </div>
+      	   	<p class="border-paragraph">{{scanResult}}</p>
+      	   	<button class="mbutton-outline button  button-outline button-positive" ng-click="nextScan()" > Next Scan </button>
+        </div>
       </div>
-      <div class="row result-detail">
-         <div class="col col-20">
-          <i class="icon ion-clock"></i>
-         </div>
-        <div class="col col-40">
-          <div class="row">
-            <span class="time-result">{{timeScan}}ms</span>
-          </div>
-          <div class="row">
-            <h5>Response Time</h5>
-          </div>
-        </div>
-        <div class="col col-20">
-           <!-- <img class="icon_result" src="img/focus.png"> -->
-           <i class="icon ion-aperture"></i>
-        </div>
-        <div class="col col-40">
-           <div class="row">
-             <span class="time-result">{{timeFocus}}ms</span>
-          </div>
-          <div class="row">
-           <ion-icon name="add"></ion-icon>
-            <h5>Focus</h5>
-          </div>
-        </div>
-      </div>
-	   	<p class="border-paragraph">{{scanResult}}</p>
-	   	<button class="mbutton-outline button  button-outline button-positive" ng-click="nextScan()" > Next Scan </button>
    </ion-content>
 </ion-view>

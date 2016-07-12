@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
-h3, h5{
+h3{
+	color: #ffffff;
+	font-weight: bold;
+}
+h5{
 	color: #ffffff;
 }
 
@@ -40,7 +44,7 @@ h3, h5{
 	width: 100%;
 	background: #35a4e2;
 	padding: 5px;	
-    font-size: 1.25em;
+    font-size: 1.35em;
 	color:  #ffffff;
     border-radius: 8px;
 }	
@@ -72,11 +76,22 @@ canvas{
     height: auto !important;
     margin-left: -20%;
 }
+.col-result{
+	padding-left: 0px;
+	padding-right: 0px;
+
+} 
+.result-detail{
+	padding-left: 0px;
+	padding-right: 0px;
+}
 .col-focus{
-	margin-left: -25px !important;
+	margin-left: -30px !important;
+	margin-right: 40px !important;
+
 }
 .col-total{
-	margin-left: -25px !important;
+	margin-left: -30px !important;
 }
 .time-result{
 	font-weight: bold;
@@ -117,10 +132,14 @@ canvas{
 	    margin-left: -40%;
 	}
 	.col-focus{
-		margin-left: 0px !important;
-		margin-right: 0px !important;
+		margin-left: -20px !important;
+		margin-right: 30px !important;
 	}
 	.col-total{
-		margin-left: 0px !important;
-	}	
+		margin-left: -20px !important;
+	}
+	.mbutton-outline  {
+		margin-top: 2%;
+	}
+
 }

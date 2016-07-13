@@ -18,9 +18,17 @@ h5{
 	background-color: #00476e !important;
 }
 .content{
-	margin-top: 40px;
+	margin-top: 20px;
 	height: 100%;
 	background: #006eab;
+}
+.implemented{
+	margin-bottom: 0px !important;
+	padding-bottom: 0px !important;
+}
+div.implemented h3{
+	font-size: 1.2em;
+	margin-bottom: 0px !important;
 }
 .csc_logo{
 	width: 35%;
@@ -29,7 +37,7 @@ h5{
 }
 .mon-logo-row{
 	background: #ffffff;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 .row-blue{
 	padding-top: 20px;
@@ -37,8 +45,9 @@ h5{
 .mom_logo{
 	display:block;
     margin:auto;
-    width: 35%;
+    width: 50%;
 }
+
 .border-paragraph{
 	border: 1px solid #005787;
 	width: 100%;
@@ -111,10 +120,10 @@ canvas{
 @media only screen and (min-width : 361px) {
 /* Styles */
 	.mom_logo{
-	    width: 20%;
+	    width: 23%;
 	}
 	.csc_logo{
-		width: 20%;
+		width: 15%;
 	}
 	.col {
 		margin-bottom: 0px !important;

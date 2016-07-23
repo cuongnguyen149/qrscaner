@@ -1,7 +1,8 @@
-/* Empty. Add your own CSS if you like */
+			/* Empty. Add your own CSS if you like */
 h3{
 	color: #ffffff;
 	font-weight: bold;
+	padding-top: 10px;
 }
 h5{
 	color: #ffffff;
@@ -77,13 +78,12 @@ div.implemented h3{
 .chart{
 	height: 45%;
 	background: transparent;
-	margin-bottom: 10px;	
 }
 
 canvas{
-    width: 140% !important;
+    width: 120% !important;
     height: auto !important;
-    margin-left: -20%;
+    margin-left: -10%;
 }
 .col-result{
 	padding-left: 0px;
@@ -104,7 +104,7 @@ canvas{
 }
 .time-result{
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.0em;
 	color: #ffffff;
 }
 
@@ -138,7 +138,7 @@ canvas{
 	canvas{
 	    width: 160% !important;
 	    height: auto !important;
-	    margin-left: -40%;
+	    margin-left: -30%;
 	}
 	.col-focus{
 		margin-left: -20px !important;
@@ -150,5 +150,52 @@ canvas{
 	.mbutton-outline  {
 		margin-top: 2%;
 	}
+}
+/* iPhone 6 portrait */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2)
+{ 
+	.mom_logo{
+	    width: 40%;
+	}
+	.csc_logo{
+		width: 25%;
+	}
+	.content{
+		margin-top: 30px;
+	}
+	.mon-logo-row{
+		padding-bottom: 30px;
+	}
+	.col {
+		margin-bottom: 10px !important;
+	}
+	.col-focus{
+		margin-left: -40px !important;
+		margin-right: 40px !important;
+	}
+	.col-total{
+		margin-left: -40px !important;
+	}
+	.result-detail{
+		margin-left: 10px;
+	}
+	.chart{
+	height: 45%;
+	background: transparent;
+	margin-bottom: 10px;	
+}
+}
 
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+  	h3 {
+  		padding-top: 0px;
+  	}
 }

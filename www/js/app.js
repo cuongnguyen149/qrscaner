@@ -7,16 +7,7 @@ var app = angular.module('qrscanner', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
+    
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
@@ -44,8 +35,8 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
     console.log('hey, timeScan has changed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     var now           = Date.now();
     $scope.scanResult = $rootScope.scanResult;
-    $scope.timeScan   = now -  $rootScope.timeScan;
-    $scope.timeFocus  = $rootScope.timeScan - $rootScope.startTime;
+    $scope.timeScan   = Math.round(now -  $rootScope.timeScan);
+    $scope.timeFocus  = Math.round($rootScope.timeScan - $rootScope.startTime);
     $scope.totalTime  = $scope.timeScan + $scope.timeFocus;
     var data = [{
       value: $scope.timeScan,
@@ -54,6 +45,13 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
       value: $scope.timeFocus,
       color: "#e77200"
     }];
+    // var data = [{
+    //   value: 123,
+    //   color: "#35a4e2"
+    // }, {
+    //   value: 321,
+    //   color: "#e77200"
+    // }];
     var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
      responsive: true,
      percentageInnerCutout : 70,
@@ -91,6 +89,13 @@ app.controller("workpassCtr", function($rootScope, $scope, $cordovaBarcodeScanne
       value: $scope.timeFocus,
       color: "#e77200"
   }];
+  // var data = [{
+  //     value: 123,
+  //     color: "#35a4e2"
+  //   }, {
+  //     value: 321,
+  //     color: "#e77200"
+  //   }];
   var DoughnutTextInsideChart = new Chart(angular.element(document.querySelector("#radar"))[0].getContext('2d')).DoughnutTextInside(data, {
     responsive: true,
     percentageInnerCutout : 70,

@@ -18,7 +18,7 @@
 #import "zxing-all-in-one.h"
 #import <Cordova/CDVPlugin.h>
 
-
+BOOL                        isDialogOpened = NO;
 //------------------------------------------------------------------------------
 // Delegate to handle orientation functions
 //------------------------------------------------------------------------------
@@ -50,6 +50,7 @@
 - (void)returnImage:(NSString*)filePath format:(NSString*)format callback:(NSString*)callback;
 - (void)returnSuccess:(NSString*)scannedText format:(NSString*)format cancelled:(BOOL)cancelled flipped:(BOOL)flipped callback:(NSString*)callback;
 - (void)returnError:(NSString*)message callback:(NSString*)callback;
+
 @end
 
 //------------------------------------------------------------------------------
@@ -71,6 +72,7 @@
 @property (nonatomic)         BOOL                        isFrontCamera;
 @property (nonatomic)         BOOL                        isShowFlipCameraButton;
 @property (nonatomic)         BOOL                        isFlipped;
+
 @property (nonatomic, strong) NSNumber*                   timeScanned;
 
 
@@ -141,47 +143,53 @@
 
 //--------------------------------------------------------------------------
 - (void)scan:(CDVInvokedUrlCommand*)command {
-    CDVbcsProcessor* processor;
-    NSString*       callback;
-    NSString*       capabilityError;
+     if(isDialogOpened == NO)
+    {
 
-    callback = command.callbackId;
+        isDialogOpened = YES ;
 
-    NSDictionary* options = command.arguments.count == 0 ? [NSNull null] : [command.arguments objectAtIndex:0];
+        CDVbcsProcessor* processor; 
+        NSString*       callback;
+        NSString*       capabilityError;
 
-    if ([options isKindOfClass:[NSNull class]]) {
-      options = [NSDictionary dictionary];
+        callback = command.callbackId;
+
+        NSDictionary* options = command.arguments.count == 0 ? [NSNull null] : [command.arguments objectAtIndex:0];
+
+        if ([options isKindOfClass:[NSNull class]]) {
+          options = [NSDictionary dictionary];
+        }
+        BOOL preferFrontCamera = [options[@"preferFrontCamera"] boolValue];
+        BOOL showFlipCameraButton = [options[@"showFlipCameraButton"] boolValue];
+        // We allow the user to define an alternate xib file for loading the overlay.
+        NSString *overlayXib = [options objectForKey:@"overlayXib"];
+
+        capabilityError = [self isScanNotPossible];
+        if (capabilityError) {
+            [self returnError:capabilityError callback:callback];
+            return;
+        }
+
+        processor = [[CDVbcsProcessor alloc]
+                     initWithPlugin:self
+                     callback:callback
+                     parentViewController:self.viewController
+                     alterateOverlayXib:overlayXib
+                     ];
+        // queue [processor scanBarcode] to run on the event loop
+
+        if (preferFrontCamera) {
+          processor.isFrontCamera = true;
+        }
+
+        if (showFlipCameraButton) {
+          processor.isShowFlipCameraButton = true;
+        }
+
+        processor.formats = options[@"formats"];
+
+        [processor performSelector:@selector(scanBarcode) withObject:nil afterDelay:0];
     }
-    BOOL preferFrontCamera = [options[@"preferFrontCamera"] boolValue];
-    BOOL showFlipCameraButton = [options[@"showFlipCameraButton"] boolValue];
-    // We allow the user to define an alternate xib file for loading the overlay.
-    NSString *overlayXib = [options objectForKey:@"overlayXib"];
-
-    capabilityError = [self isScanNotPossible];
-    if (capabilityError) {
-        [self returnError:capabilityError callback:callback];
-        return;
-    }
-
-    processor = [[CDVbcsProcessor alloc]
-                 initWithPlugin:self
-                 callback:callback
-                 parentViewController:self.viewController
-                 alterateOverlayXib:overlayXib
-                 ];
-    // queue [processor scanBarcode] to run on the event loop
-
-    if (preferFrontCamera) {
-      processor.isFrontCamera = true;
-    }
-
-    if (showFlipCameraButton) {
-      processor.isShowFlipCameraButton = true;
-    }
-
-    processor.formats = options[@"formats"];
-
-    [processor performSelector:@selector(scanBarcode) withObject:nil afterDelay:0];
 }
 
 //--------------------------------------------------------------------------
@@ -350,6 +358,8 @@ parentViewController:(UIViewController*)parentViewController
     // viewcontroller holding onto a reference to us, release them so they
     // will release us
     self.viewController = nil;
+    isDialogOpened = NO ;
+
 }
 
 //--------------------------------------------------------------------------
@@ -391,12 +401,14 @@ parentViewController:(UIViewController*)parentViewController
         NSString* result = [NSString stringWithFormat:@"%@;%@", format, self.timeScanned];
         [self.plugin returnSuccess:text format:result cancelled:FALSE flipped:FALSE callback:self.callback];
     });
+    isDialogOpened = NO ;
 }
 
 //--------------------------------------------------------------------------
 - (void)barcodeScanFailed:(NSString*)message {
     [self barcodeScanDone];
     [self.plugin returnError:message callback:self.callback];
+    isDialogOpened = NO ;
 }
 
 //--------------------------------------------------------------------------
@@ -406,6 +418,7 @@ parentViewController:(UIViewController*)parentViewController
     if (self.isFlipped) {
         self.isFlipped = NO;
     }
+    isDialogOpened = NO ;
 }
 
 - (void)flipCamera {

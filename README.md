@@ -24,3 +24,12 @@
 ####3. Open your android project by Android Studio at:
       yourpathofproject/platforms/android
 ####4 Run or build apk file of project depend on your demand.
+  ![screenshot061](https://cloud.githubusercontent.com/assets/8589460/17784092/51303272-65a5-11e6-94cc-a8b360d9f627.jpg)
+#Run project on IOS (You must use MAC environment (MacOSX):
+####1. Open terminal at project directory and run (skip this step if you do this before).
+      npm install
+####2. Then run:
+      ionic platform add ios
+####3. Open your android project by Xcode at:
+      yourpathofproject/platforms/ios
+####4 Run or build apk file of project depend on your demand.  

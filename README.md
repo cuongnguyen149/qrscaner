@@ -15,5 +15,5 @@
   4. Go to:
       http://localhost:8100/#/
   5. Now you see:
-  ![screenshot060](https://cloud.githubusercontent.com/assets/8589460/17783388/0f356048-65a2-11e6-8b28-7e85c5328b0c.jpg)
+![screenshot060](https://cloud.githubusercontent.com/assets/8589460/17783388/0f356048-65a2-11e6-8b28-7e85c5328b0c.jpg)
       

@@ -5,7 +5,7 @@
     Install cordovar -> https://cordova.apache.org/docs/en/latest/guide/cli/
 ###Ionic : 
     install ionic -> http://ionicframework.com/docs/guide/installation.html
-#Run project on website:
+##Run project on website:
 ####1.Checkout or clone source code.
 ####2.Open terminal at project directory and run:
       npm install
@@ -16,7 +16,7 @@
 ####5.Now you see:
   ![screenshot060](https://cloud.githubusercontent.com/assets/8589460/17783388/0f356048-65a2-11e6-8b28-7e85c5328b0c.jpg)
 
-#Run project on ANDROID:
+##Run project on ANDROID:
 ####1. Open terminal at project directory and run (skip this step if you do this before).
       npm install
 ####2. Then run:
@@ -25,7 +25,7 @@
       yourpathofproject/platforms/android
 ####4 Run or build apk file of project depend on your demand.
   ![screenshot061](https://cloud.githubusercontent.com/assets/8589460/17784092/51303272-65a5-11e6-94cc-a8b360d9f627.jpg)
-#Run project on IOS (You must use MAC environment (MacOSX):
+##Run project on IOS (You must use MAC environment (MacOSX):
 ####1. Open terminal at project directory and run (skip this step if you do this before).
       npm install
 ####2. Then run:
